@@ -82,6 +82,8 @@ locale-gen
 locale-gen en_US.UTF-8
 dpkg-reconfigure locales
 
+apt-get install curl
+
 # install vesta with admin's email
 wget http://dl.4players.de/ts/releases/$version/TeamSpeak3-Client-linux_amd64-$version.run
 sudo adduser --disabled-login teamspeak
