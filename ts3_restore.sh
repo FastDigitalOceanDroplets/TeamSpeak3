@@ -39,7 +39,11 @@ fi
     done
 
     service teamspeak stop
+    rm -R /usr/local/teamspeak/files/
+    rm /usr/local/teamspeak/ts3server.sqlitedb
     tar -xzf /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
+    mv /usr/local/teamspeak/files/virtualserver_1/channel_1/ts3server.sqlitedb /usr/local/teamspeak/ts3server.sqlitedb
+    mv /usr/local/teamspeak/files/virtualserver_1/channel_1/files  /usr/local/teamspeak/
     service teamspeak start
     # rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
     exit
