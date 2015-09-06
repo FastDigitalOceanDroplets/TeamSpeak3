@@ -20,11 +20,11 @@ if [ ! -f /usr/local/teamspeak/files/virtualserver_1/channel_1/$1 ]; then
 else
     echo "Aca esta!"
     # hacer algo
+    ls | grep "^ts3_bkp_" 
     
     
     
-    
-    rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$1
+    #rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$1
     exit
 fi
 
