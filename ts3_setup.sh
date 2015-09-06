@@ -8,19 +8,14 @@ fi
 cd
 rm -r teamspeak3-server_linux*
 
-# curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh  && bash vestacp.sh
+# curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh  && bash ts3_setup.sh
 echo
 echo
-echo "################################################################"
-echo "#     https://github.com/FastDigitalOceanDroplets/VestaCP      #"
-echo "#                                                              #"
-echo "# We will go though the proccess of setting up a full web      #"
-echo "# server. It will have web, php, email, ftp, dns, mysql all in #"
-echo "# a fantastic easy and smart to use control panel called Vesta.#"
-echo "#                                                              #"
-echo "# Vesta is free, but you can get paid help at their site.      #"
-echo "#                    https://vestacp.com                       #"
-echo "################################################################"
+echo "####################################################################"
+echo "#      https://github.com/FastDigitalOceanDroplets/TeamSpeak3      #"
+echo "#                                                                  #"
+echo "# We will go though the proccess of setting up a TeamSpeak3 server #
+echo "####################################################################"
 echo
 
 
@@ -63,7 +58,7 @@ locale-gen
 locale-gen en_US.UTF-8
 dpkg-reconfigure locales
 
-apt-get install curl
+apt-get install mc php5-cli
 
 # install TeamSpeak
 versions=`curl -s http://dl.4players.de/ts/releases/ | \
@@ -87,11 +82,17 @@ then
 fi
 wget http://dl.4players.de/ts/releases/$release/teamspeak3-server_linux-amd64-$release.tar.gz
 
-adduser --disabled-login teamspeak
+echo
+echo Introduce a password for the teamspeak unix user (not the server service !!!)
+adduser --disabled-login --gecos "" teamspeak
+
 tar xzf teamspeak3-server_linux-amd64-$release.tar.gz
 mv teamspeak3-server_linux-amd64 /usr/local/teamspeak
 chown -R teamspeak:teamspeak /usr/local/teamspeak
 ln -s /usr/local/teamspeak/ts3server_startscript.sh /etc/init.d/teamspeak
 update-rc.d teamspeak defaults
 service teamspeak start
+
 exit
+touch index.php
+php -S 0.0.0.0:8000 index.php
