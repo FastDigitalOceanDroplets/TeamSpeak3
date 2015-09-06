@@ -24,8 +24,6 @@ fi
     
 prompt="Please select a file:"
 options=( $(find -maxdepth 1 -print0 | xargs -0 | sed -r 's/^.{2}//') )
-echo $options
-exit
 PS3="$prompt "
 select opt in "${options[@]}" "Quit" ; do 
     if (( REPLY == 1 + ${#options[@]} )) ; then
@@ -39,11 +37,10 @@ select opt in "${options[@]}" "Quit" ; do
         echo "Invalid option. Try another one."
     fi
 done    
+echo $options
+exit
 
-ls -ld $opt
-    
-    
-    rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
+    # rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
     exit
 #fi
 
