@@ -16,7 +16,7 @@ tar -czvf $filename ts3server.sqlitedb files/
 echo "File $filename is ready to download from teamspeak client default folder."
 echo "Come back here and type 'ok' when you are done"
 input=""
-while [ $input -ne "ok" ];do
+while [ $input != "ok" ];do
     read $input
 done
 rm $filename
