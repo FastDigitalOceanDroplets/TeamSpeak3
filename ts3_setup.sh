@@ -59,8 +59,8 @@ locale-gen
 locale-gen en_US.UTF-8
 dpkg-reconfigure locales
 
+# Handy apps to have in the server
 apt-get install mc php5-cli
-
 
 # install TeamSpeak
 versions=`curl -s http://dl.4players.de/ts/releases/ | \
@@ -95,6 +95,7 @@ ln -s /usr/local/teamspeak/ts3server_startscript.sh /etc/init.d/teamspeak
 update-rc.d teamspeak defaults
 service teamspeak start
 
+rm teamspeak3-server_linux-amd64-$release.tar.gz
+rm ts3_setup.sh
+
 exit
-touch index.php
-php -S 0.0.0.0:8000 index.php
