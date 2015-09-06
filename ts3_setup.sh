@@ -8,7 +8,7 @@ fi
 cd
 rm -r teamspeak3-server_linux*
 
-# curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh
+# curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh  && bash vestacp.sh
 echo
 echo
 echo "################################################################"
