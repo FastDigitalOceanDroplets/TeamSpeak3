@@ -2,8 +2,6 @@
 A fast way to put up a TeamSpeak 3 server on Digital Ocean in no time.
     curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh  && bash ts3_setup.sh
 
-
-
     ------------------------------------------------------------------
                           I M P O R T A N T                           
     ------------------------------------------------------------------
