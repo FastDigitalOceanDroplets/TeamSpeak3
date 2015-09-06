@@ -6,32 +6,31 @@ if [ "x$(id -u)" != 'x0' ]; then
     exit 1
 fi
 
-    cd /usr/local/teamspeak/files/virtualserver_1/channel_1
-    
-    prompt="Please select a file:"
-    options=( $(find -maxdepth 1 -print0 | xargs -0 | sed -r 's/^.{2}//') )
-    PS3="$prompt "
-    select opt in "${options[@]}" "Quit" ; do 
-        if (( REPLY == 1 + ${#options[@]} )) ; then
-            exit
-    
-        elif (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
-            #echo  "You picked $opt which is file $REPLY"
-            break
+cd /usr/local/teamspeak/files/virtualserver_1/channel_1
+echo
 
-        else
-            echo "Invalid option. Try another one."
-        fi
-    done
+for bkp in `find -name "ts3_bkp_*" -type f`
+do
+    echo $bkp
+done
 
+
+read -p "Type the file to restore: " opt
+    mkdir /root/tmp_ts/
+    cp /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt /root/tmp_ts/
+    cd /root/tmp_ts/
     service teamspeak stop
     rm -R /usr/local/teamspeak/files/
     rm /usr/local/teamspeak/ts3server.sqlitedb
-    tar -xzf /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
-    mv /usr/local/teamspeak/files/virtualserver_1/channel_1/ts3server.sqlitedb /usr/local/teamspeak/ts3server.sqlitedb
-    mv /usr/local/teamspeak/files/virtualserver_1/channel_1/files  /usr/local/teamspeak/
-    service teamspeak start
-    # rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
-    exit
-#fi
+    tar -xzf $opt
 
+    chown -R teamspeak:teamspeak ./
+
+    rm $opt
+    cd /root
+    mv /root/tmp_ts/ts3server.sqlitedb /usr/local/teamspeak/ts3server.sqlitedb
+    mv /root/tmp_ts/files  /usr/local/teamspeak/
+    rm -R /root/tmp_ts
+    service teamspeak start
+    exit
+    
