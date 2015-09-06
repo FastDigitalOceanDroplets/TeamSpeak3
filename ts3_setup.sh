@@ -80,9 +80,9 @@ do
     fi
 done
 if [[ $release -eq "no_server_version" ]]
-then.
+then
     echo "This script cant find any server version in the usual download page."
-    echo "This can mean that this script is old and must be re-writen"
+    echo "This can mean that this script is old and must be re-writen."
     exit 1
 fi
 wget http://dl.4players.de/ts/releases/$release/teamspeak3-server_linux-amd64-$release.tar.gz
