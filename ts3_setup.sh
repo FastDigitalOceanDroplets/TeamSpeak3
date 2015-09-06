@@ -66,7 +66,7 @@ dpkg-reconfigure locales
 apt-get install curl
 
 # install TeamSpeak
-versions=`curl -s http://dl.4players.de/ts/releasesr/ | \
+versions=`curl -s http://dl.4players.de/ts/releases/ | \
   grep -Po '(?<=href=")[0-9]+(\.[0-9]+){2,3}(?=/")' | \
   sort -V`
 release="no_server_version"
