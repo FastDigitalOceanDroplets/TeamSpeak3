@@ -24,7 +24,8 @@ fi
     
 prompt="Please select a file:"
 options=( $(find -maxdepth 1 -print0 | xargs -0) )
-
+echo options
+exit
 PS3="$prompt "
 select opt in "${options[@]}" "Quit" ; do 
     if (( REPLY == 1 + ${#options[@]} )) ; then
