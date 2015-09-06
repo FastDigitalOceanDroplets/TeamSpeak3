@@ -15,10 +15,15 @@ fi
 
 if [ ! -f /usr/local/teamspeak/files/virtualserver_1/channel_1/$1 ]; then
     echo "File not found!"
+    echo "Upload file thoug TS3 to the default channel first"
     exit 1
 else
     echo "Aca esta!"
     # hacer algo
+    
+    
+    
+    
     rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$1
     exit
 fi
