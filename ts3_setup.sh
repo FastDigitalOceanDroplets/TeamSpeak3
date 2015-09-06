@@ -1,33 +1,14 @@
 #!/bin/bash
 
-versions=`curl -s http://dl.4players.de/ts/releases/ | \
-  grep -Po '(?<=href=")[0-9]+(\.[0-9]+){2,3}(?=/")'`
-  
-# dirs=`echo $version |awk -F ' ' '{print NF}'`
-
-for dir in versions
-do
-wget -q --spider http://dl.4players.de/ts/releases/$dir/teamspeak3-server_linux-amd64-$dir.tar.gz
-echo $dir $?
-done
-
-
-
-exit
-
-
-
-
-
-
-
 # Prevents doing this from other account than root
 if [ "x$(id -u)" != 'x0' ]; then
     echo 'Error: this script can only be executed by root'
     exit 1
 fi
+cd
+rm -r teamspeak3-server_linux*
 
-#curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/VestaCP/master/vestacp_post.sh
+# curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh
 echo
 echo
 echo "################################################################"
@@ -84,25 +65,33 @@ dpkg-reconfigure locales
 
 apt-get install curl
 
-# install vesta with admin's email
-wget http://dl.4players.de/ts/releases/$version/TeamSpeak3-Client-linux_amd64-$version.run
-sudo adduser --disabled-login teamspeak
-tar xzf teamspeak3-server_linux-amd64-3.0.11.4.tar.gz
-sudo mv teamspeak3-server_linux-amd64 /usr/local/teamspeak
-sudo chown -R teamspeak:teamspeak /usr/local/teamspeak
-sudo ln -s /usr/local/teamspeak/ts3server_startscript.sh /etc/init.d/teamspeak
-sudo update-rc.d teamspeak defaults
-sudo service teamspeak start
-w3m -dump -o display_charset=UTF-8 http://dl.4players.de/ts/releases/  > output.txt
-
-versions=`curl -s http://dl.4players.de/ts/releases/ | \
+# install TeamSpeak
+versions=`curl -s http://dl.4players.de/ts/releasesr/ | \
   grep -Po '(?<=href=")[0-9]+(\.[0-9]+){2,3}(?=/")' | \
-  sort -Vr | head -1`
-  
-dirs=`echo $version |awk -F ' ' '{print NF}'`
-
-for dir in versions
+  sort -V`
+release="no_server_version"
+for dir in $versions
 do
-wget -q --spider http://dl.4players.de/ts/releases/$dir/teamspeak3-server_linux-amd64-$dir.tar.gz
-echo $dir $?
+    status=`curl -o /dev/null --silent --head --write-out '%{http_code}\n' http://dl.4players.de/ts/releases/$dir/teamspeak3-server_linux-amd64-$dir.tar.gz`
+    if [[ $status -eq "200" ]]
+    then
+      release=$dir
+      echo -ne "Latest server: $release      \033[0K\r"
+    fi
 done
+if [[ $release -eq "no_server_version" ]]
+then.
+    echo "This script cant find any server version in the usual download page."
+    echo "This can mean that this script is old and must be re-writen"
+    exit 1
+fi
+wget http://dl.4players.de/ts/releases/$release/teamspeak3-server_linux-amd64-$release.tar.gz
+
+adduser --disabled-login teamspeak
+tar xzf teamspeak3-server_linux-amd64-$release.tar.gz
+mv teamspeak3-server_linux-amd64 /usr/local/teamspeak
+chown -R teamspeak:teamspeak /usr/local/teamspeak
+ln -s /usr/local/teamspeak/ts3server_startscript.sh /etc/init.d/teamspeak
+update-rc.d teamspeak defaults
+service teamspeak start
+exit
