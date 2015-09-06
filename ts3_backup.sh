@@ -9,7 +9,7 @@ fi
 if [ $# -ne 0 ]; then
     echo "No arguments neeaded. Ignoring arguments."
 fi
-$filename=`date`
+filename="ts3_bkp_$(date +"%Y-%m-%d_%H-%M-%S").tar.gz"
 echo $filename
 
 exit
