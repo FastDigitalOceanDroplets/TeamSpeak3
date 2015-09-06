@@ -23,7 +23,7 @@ echo "teamspeak client default folder."
 echo "Come back here and type 'ok' when you are done"
 input=""
 while [[ "$input" != "ok" ]]; do
-    read $input
+    read input
 done
 
 rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$filename
