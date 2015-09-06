@@ -21,8 +21,12 @@ fi
     cd /usr/local/teamspeak/files/virtualserver_1/channel_1
     echo "Aca esta!"
     # hacer algo
-    ls | grep  ^ts3_bkp_.*\.tar.gz$ 
-    
+    for lines in `ls | grep  ^ts3_bkp_.*\.tar.gz$`
+
+do
+echo $lines
+
+done
     
     
     #rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$1
