@@ -8,6 +8,8 @@ fi
 cd
 rm -r teamspeak3-server_linux*
 rm -r ts3_setup
+curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_restore.sh
+curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_backup.sh
 
 # curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh  && bash ts3_setup.sh
 echo
