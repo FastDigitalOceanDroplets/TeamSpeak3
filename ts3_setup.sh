@@ -60,39 +60,3 @@ dpkg-reconfigure locales
 
 apt-get install mc php5-cli
 
-# install TeamSpeak
-versions=`curl -s http://dl.4players.de/ts/releases/ | \
-  grep -Po '(?<=href=")[0-9]+(\.[0-9]+){2,3}(?=/")' | \
-  sort -V`
-release="no_server_version"
-for dir in $versions
-do
-    status=`curl -o /dev/null --silent --head --write-out '%{http_code}\n' http://dl.4players.de/ts/releases/$dir/teamspeak3-server_linux-amd64-$dir.tar.gz`
-    if [[ $status -eq "200" ]]
-    then
-      release=$dir
-      echo -ne "Latest server: $release      \033[0K\r"
-    fi
-done
-if [[ $release -eq "no_server_version" ]]
-then
-    echo "This script cant find any server version in the usual download page."
-    echo "This can mean that this script is old and must be re-writen."
-    exit 1
-fi
-wget http://dl.4players.de/ts/releases/$release/teamspeak3-server_linux-amd64-$release.tar.gz
-
-echo
-echo "Introduce a password for the teamspeak unix user:"
-adduser --disabled-login  teamspeak
-
-tar xzf teamspeak3-server_linux-amd64-$release.tar.gz
-mv teamspeak3-server_linux-amd64 /usr/local/teamspeak
-chown -R teamspeak:teamspeak /usr/local/teamspeak
-ln -s /usr/local/teamspeak/ts3server_startscript.sh /etc/init.d/teamspeak
-update-rc.d teamspeak defaults
-service teamspeak start
-
-exit
-touch index.php
-php -S 0.0.0.0:8000 index.php
