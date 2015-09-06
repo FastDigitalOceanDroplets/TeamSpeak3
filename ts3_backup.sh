@@ -10,7 +10,7 @@ if [ $# -ne 0 ]; then
     echo "No arguments neeaded. Ignoring arguments."
 fi
 
-rm -R /usr/local/teamspeak/files/virtualserver_1/channel_1/ts3_bkp_*
+rm -R /usr/local/teamspeak/files/virtualserver_1/channel_1/ts3_bkp_* 2> /dev/null
 
 filename="ts3_bkp_$(date +"%Y-%m-%d_%H-%M-%S").tar.gz"
 cd /usr/local/teamspeak/
