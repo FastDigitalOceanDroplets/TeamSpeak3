@@ -19,7 +19,7 @@ chown teamspeak:teamspeak /usr/local/teamspeak/files/virtualserver_1/channel_1/$
 echo "File $filename is ready to download from teamspeak client default folder."
 echo "Come back here and type 'ok' when you are done"
 input=""
-while [[ $input != "ok" ]];do
+while [[ "$input" != "ok" ]]; do
     read $input
 done
 rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$filename
