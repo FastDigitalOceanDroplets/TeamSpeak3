@@ -14,7 +14,7 @@ rm -R /usr/local/teamspeak/files/virtualserver_1/channel_1/ts3_bkp_*
 
 filename="ts3_bkp_$(date +"%Y-%m-%d_%H-%M-%S").tar.gz"
 cd /usr/local/teamspeak/
-tar -czvf /root/$filename ts3server.sqlitedb files/
+tar -qczvf /root/$filename ts3server.sqlitedb files/
 mv /root/$filename /usr/local/teamspeak/files/virtualserver_1/channel_1/
 chown teamspeak:teamspeak /usr/local/teamspeak/files/virtualserver_1/channel_1/$filename
 
