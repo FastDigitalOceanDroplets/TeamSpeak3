@@ -23,7 +23,7 @@ fi
     # hacer algo
     
 prompt="Please select a file:"
-options=( $(find -maxdepth 1 -print0 | xargs -0) )
+options=( $(find -maxdepth 1 -print0 | xargs -0 | sed -r 's/^.{2}//') )
 echo $options
 exit
 PS3="$prompt "
@@ -32,7 +32,7 @@ select opt in "${options[@]}" "Quit" ; do
         exit
 
     elif (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
-        echo  "You picked $opt which is file $REPLY"
+        #echo  "You picked $opt which is file $REPLY"
         break
 
     else
@@ -43,13 +43,7 @@ done
 ls -ld $opt
     
     
-    for lines in `ls | grep  ^ts3_bkp_.*\.tar.gz$`
-    do
-        echo $lines
-    done
-    
-    
-    #rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$1
+    rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$opt
     exit
 #fi
 
