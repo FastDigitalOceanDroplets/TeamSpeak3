@@ -10,8 +10,16 @@ if [ $# -ne 0 ]; then
     echo "No arguments neeaded. Ignoring arguments."
 fi
 filename="ts3_bkp_$(date +"%Y-%m-%d_%H-%M-%S").tar.gz"
-echo $filename
+cd /usr/local/teamspeak/files/
+tar -czvf $filename ts3server.sqlitedb files/
 
+echo "File $filename is ready to download from teamspeak client default folder."
+echo "Come back here and type 'ok' when you are done"
+input=""
+while [ $input -ne "ok"];do
+    read $input
+done
+rm $filename
 exit
 
 
