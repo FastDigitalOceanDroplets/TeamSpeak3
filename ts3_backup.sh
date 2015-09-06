@@ -31,7 +31,7 @@ else
     echo "Aca esta!"
     # hacer algo
     
-    
+
     
     
     rm /usr/local/teamspeak/files/virtualserver_1/channel_1/$1
