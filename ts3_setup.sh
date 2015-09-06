@@ -7,6 +7,7 @@ if [ "x$(id -u)" != 'x0' ]; then
 fi
 cd
 rm -r teamspeak3-server_linux*
+rm -r ts3_setup
 
 # curl -O https://raw.githubusercontent.com/FastDigitalOceanDroplets/TeamSpeak3/master/ts3_setup.sh  && bash ts3_setup.sh
 echo
