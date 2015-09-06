@@ -84,7 +84,7 @@ wget http://dl.4players.de/ts/releases/$release/teamspeak3-server_linux-amd64-$r
 
 echo
 echo "Introduce a password for the teamspeak unix user:"
-adduser --disabled-login --gecos "" teamspeak
+adduser --disabled-login  teamspeak
 
 tar xzf teamspeak3-server_linux-amd64-$release.tar.gz
 mv teamspeak3-server_linux-amd64 /usr/local/teamspeak
