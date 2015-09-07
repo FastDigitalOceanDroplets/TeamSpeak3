@@ -65,7 +65,7 @@ locale-gen en_US.UTF-8
 dpkg-reconfigure locales
 
 # Handy apps to have in the server
-apt-get install mc php5-cli
+apt-get install mc
 
 # install TeamSpeak
 versions=`curl -s http://dl.4players.de/ts/releases/ | \
